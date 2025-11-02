@@ -1,6 +1,6 @@
+import Lotto from './domain/Lotto.js';
 import PurchasedLotto from './domain/PurchasedLotto.js';
 import { CalCulateLottoCount } from './util/calculateLottoCount.js';
-import { GernerateLottoNumber } from './util/generateLottoNumber.js';
 import { validatePurchaseAmount } from './validate/validators.js';
 import inputView from './view/inputView.js';
 import { OutputView } from './view/outputView.js';
@@ -9,8 +9,8 @@ class App {
   async run() {
     while (true) {
       try {
-        const input = await inputView.inputPurchaseAmount();
-        const amount = validatePurchaseAmount(input);
+        const inputAmount = await inputView.inputPurchaseAmount();
+        const amount = validatePurchaseAmount(inputAmount);
         const lottoCount = CalCulateLottoCount(amount);
         OutputView.printPurchaseCount(lottoCount);
 
@@ -19,6 +19,10 @@ class App {
         lottos.forEach((lotto) => {
           OutputView.printPurchaseLottos(lotto.getNumbers());
         });
+
+        const inputWinningNumber = await inputView.inputWinningNumber();
+        const winningNumbersArray = inputWinningNumber.split(',');
+        const winningNumber = new Lotto(winningNumbersArray);
       } catch (error) {
         console.log(`${error.message}`);
       }

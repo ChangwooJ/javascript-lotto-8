@@ -18,3 +18,11 @@ export function validatePurchaseAmount(amount) {
 
   return numAmount;
 }
+
+export function validateWinningNumber(winningNumber) {
+  const numWinningNumber = Number(winningNumber);
+
+  if (Number.isNaN(numWinningNumber)) {
+    throw new Error();
+  }
+}
