@@ -8,4 +8,13 @@ export const OutputView = {
   printPurchaseLottos(lotto) {
     Console.print(lotto);
   },
+  printResultHeader() {
+    Console.print(OUTPUT_MESSAGE.RESULT_HEADER);
+  },
+  printWinningResult(matchedNumber, count) {
+    Console.print(OUTPUT_MESSAGE.RESULT(matchedNumber, count));
+  },
+  printROI(ROI) {
+    Console.print(OUTPUT_MESSAGE.ROI(ROI));
+  },
 };

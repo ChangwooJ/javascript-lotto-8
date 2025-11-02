@@ -1,16 +1,25 @@
-import { winnings } from './config.js';
+import { RANK, winnings } from './config.js';
 
 export const INPUT_MESSAGE = Object.freeze({
   PURCHASE_AMOUNT: '구입금액을 입력해 주세요.\n',
-  WINNING_NUMBERS: '당첨 번호를 입력해 주세요.\n',
-  BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
+  WINNING_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
+  BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
 });
 
 export const OUTPUT_MESSAGE = Object.freeze({
   PURCHASE_COUNT: (count) => `\n${count}개를 구매했습니다.`,
-  RESULT: (number) => {
-    `${number}개 일치 (${winnings[number]}원) - 개`;
+  RESULT_HEADER: '\n당첨 통계\n---',
+  RESULT: (matchedNumber, count) => {
+    if (matchedNumber === RANK.SECOND) {
+      return `5개 일치, 보너스 볼 일치 (${winnings[
+        matchedNumber
+      ].toLocaleString()}원) - ${count}개`;
+    }
+    return `${matchedNumber}개 일치 (${winnings[
+      matchedNumber
+    ].toLocaleString()}원) - ${count}개`;
   },
+  ROI: (ROI) => `총 수익률은 ${ROI}%입니다.`,
 });
 
 export const ERROR_MESSAGE = Object.freeze({

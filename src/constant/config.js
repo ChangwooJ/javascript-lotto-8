@@ -4,10 +4,17 @@ export const LottoConfig = {
   MIN_LOTTO_NUMBER: 1,
   MAX_LOTTO_NUMBER: 45,
 };
+export const RANK = Object.freeze({
+  FIFTH: 3,
+  FOURTH: 4,
+  THIRD: 5,
+  SECOND: 5.5,
+  FIRST: 6,
+});
 export const winnings = {
-  3: '5,000',
-  4: '50,000',
-  5: '1,500,000',
-  6: '30,000,000',
-  7: '2,000,000,000',
+  [RANK.FIFTH]: 5000,
+  [RANK.FOURTH]: 50000,
+  [RANK.THIRD]: 1500000,
+  [RANK.SECOND]: 30000000,
+  [RANK.FIRST]: 2000000000,
 };

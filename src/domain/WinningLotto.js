@@ -1,4 +1,4 @@
-import { LottoConfig } from '../constant/config.js';
+import { LottoConfig, RANK, winnings } from '../constant/config.js';
 import { ERROR_MESSAGE } from '../constant/consoleMessage.js';
 import Lotto from './Lotto.js';
 
@@ -11,9 +11,9 @@ class WinningLotto extends Lotto {
     const winningNumberArray = WinningLotto.parsingNumbers(numbers);
     super(winningNumberArray);
     this.#validateBonus(bonusNumber, winningNumberArray);
-    this.#winningNumbers = winningNumberArray + bonusNumber;
+    this.#winningNumbers = winningNumberArray;
     this.#purchasedLotto = purchasedLotto;
-    this.bonusNumber = bonusNumber;
+    this.#bonusNumber = Number(bonusNumber);
   }
 
   static parsingNumbers(winningNumberArray) {
@@ -44,37 +44,55 @@ class WinningLotto extends Lotto {
     const myLottos = this.#purchasedLotto.getLottos();
 
     myLottos.forEach((lotto) => {
-      const matchingLotto = lotto
-        .getNumbers()
-        .filter((lottoNumber) => this.#winningNumbers.includes(lottoNumber));
-      results.push(matchingLotto);
+      const lottoNumbers = lotto.getNumbers();
+      const matchingLotto = lottoNumbers.filter((lottoNumber) =>
+        this.#winningNumbers.includes(lottoNumber)
+      );
+      results.push({ lottoNumbers, matchingLotto });
     });
 
     const summary = this.#getSummary(results);
+    const ROI = this.#getROI(summary);
 
-    return summary;
+    return { summary, ROI };
   }
 
   #getSummary(results) {
-    const summary = Array(7).fill(0);
-    results.forEach((result) => {
-      if (result.length >= 3 && result.length <= 5) {
-        summary[result.length] = (summary[result.length] || 0) + 1;
-      }
-      if (result.length === 6) {
-        summary[this.#determineRank(result)] =
-          (summary[this.#determineRank(result)] || 0) + 1;
+    const summary = {
+      [RANK.FIFTH]: 0,
+      [RANK.FOURTH]: 0,
+      [RANK.THIRD]: 0,
+      [RANK.SECOND]: 0,
+      [RANK.FIRST]: 0,
+    };
+
+    results.forEach(({ lottoNumbers, matchingLotto }) => {
+      const matchCount = matchingLotto.length;
+
+      if (matchCount === RANK.FIFTH) summary[RANK.FIFTH] += 1;
+      if (matchCount === RANK.FOURTH) summary[RANK.FOURTH] += 1;
+      if (matchCount === RANK.FIRST) summary[RANK.FIRST] += 1;
+
+      if (matchCount === RANK.THIRD) {
+        console.log(lottoNumbers);
+        const hasBonus = lottoNumbers.includes(this.#bonusNumber);
+        if (hasBonus) summary[RANK.SECOND] += 1;
+        else summary[RANK.THIRD] += 1;
       }
     });
 
     return summary;
   }
 
-  #determineRank(result) {
-    if (result.includes(this.#bonusNumber)) {
-      return 5;
+  #getROI(summary) {
+    let totalReturn = 0;
+    for (const rank in summary) {
+      totalReturn += summary[rank] * winnings[rank];
     }
-    return 6;
+    const ROIValue =
+      (totalReturn / this.#purchasedLotto.getLottos().length) * 100;
+    const ROI = Number(ROIValue.toFixed(2));
+    return ROI;
   }
 }
 

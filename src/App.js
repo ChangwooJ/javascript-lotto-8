@@ -1,3 +1,4 @@
+import { RANK } from './constant/config.js';
 import PurchasedLotto from './domain/PurchasedLotto.js';
 import WinningLotto from './domain/WinningLotto.js';
 import { CalCulateLottoCount } from './util/calculateLottoCount.js';
@@ -27,7 +28,12 @@ class App {
           inputBonusNumber,
           purchasedLotto
         );
-        const result = winningNumber.getResult();
+        const { summary, ROI } = winningNumber.getResult();
+        OutputView.printResultHeader();
+        for (const rank of Object.values(RANK)) {
+          OutputView.printWinningResult(rank, summary[rank]);
+        }
+        OutputView.printROI(ROI);
       } catch (error) {
         console.log(`${error.message}`);
       }
