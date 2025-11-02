@@ -10,34 +10,75 @@ class App {
   async run() {
     while (true) {
       try {
-        const inputAmount = await inputView.inputPurchaseAmount();
-        const amount = validatePurchaseAmount(inputAmount);
+        const amount = await this.#getPurchaseAmount();
         const lottoCount = CalCulateLottoCount(amount);
-        OutputView.printPurchaseCount(lottoCount);
+        const purchasedLotto = this.#printPurchasedLottos(lottoCount);
 
-        const purchasedLotto = new PurchasedLotto(lottoCount);
-        const lottos = purchasedLotto.getLottos();
-        lottos.forEach((lotto) => {
-          OutputView.printPurchaseLottos(lotto.getNumbers());
-        });
+        const winningNumber = await this.#getValidatedWinningNumbers();
+        const bonusNumber = await this.#getValidatedBonusNumber();
 
-        const inputWinningNumber = await inputView.inputWinningNumber();
-        const inputBonusNumber = await inputView.inputBonusNumber();
-        const winningNumber = new WinningLotto(
-          inputWinningNumber,
-          inputBonusNumber,
-          purchasedLotto
-        );
-        const { summary, ROI } = winningNumber.getResult();
-        OutputView.printResultHeader();
-        for (const rank of Object.values(RANK)) {
-          OutputView.printWinningResult(rank, summary[rank]);
-        }
-        OutputView.printROI(ROI);
+        this.#printWinningResults(winningNumber, bonusNumber, purchasedLotto);
       } catch (error) {
-        console.log(`${error.message}`);
+        console.log(error.message);
       }
     }
+  }
+
+  async #getPurchaseAmount() {
+    while (true) {
+      try {
+        const input = await inputView.inputPurchaseAmount();
+        return validatePurchaseAmount(input);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  }
+
+  async #getValidatedWinningNumbers() {
+    while (true) {
+      try {
+        return await inputView.inputWinningNumber();
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  }
+
+  async #getValidatedBonusNumber() {
+    while (true) {
+      try {
+        return await inputView.inputBonusNumber();
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  }
+
+  #printPurchasedLottos(count) {
+    const purchasedLotto = new PurchasedLotto(count);
+    OutputView.printPurchaseCount(count);
+
+    purchasedLotto.getLottos().forEach((lotto) => {
+      OutputView.printPurchaseLottos(lotto.getNumbers());
+    });
+
+    return purchasedLotto;
+  }
+
+  #printWinningResults(winningNumber, bonusNumber, purchasedLotto) {
+    const winningLotto = new WinningLotto(
+      winningNumber,
+      bonusNumber,
+      purchasedLotto
+    );
+    const { summary, ROI } = winningLotto.getResult();
+
+    OutputView.printResultHeader();
+    for (const rank of Object.values(RANK)) {
+      OutputView.printWinningResult(rank, summary[rank]);
+    }
+    OutputView.printROI(ROI);
   }
 }
 

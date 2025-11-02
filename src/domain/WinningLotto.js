@@ -1,4 +1,4 @@
-import { LottoConfig, RANK, winnings } from '../constant/config.js';
+import { LottoConfig, LottoPrice, RANK, winnings } from '../constant/config.js';
 import { ERROR_MESSAGE } from '../constant/consoleMessage.js';
 import Lotto from './Lotto.js';
 
@@ -90,8 +90,9 @@ class WinningLotto extends Lotto {
       totalReturn += summary[rank] * winnings[rank];
     }
     const ROIValue =
-      (totalReturn / this.#purchasedLotto.getLottos().length) * 100;
-    const ROI = Number(ROIValue.toFixed(2));
+      (totalReturn / this.#purchasedLotto.getLottos().length / LottoPrice) *
+      100;
+    const ROI = Number(ROIValue.toFixed(1));
     return ROI;
   }
 }
