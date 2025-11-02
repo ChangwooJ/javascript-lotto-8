@@ -24,8 +24,10 @@ class App {
         const inputBonusNumber = await inputView.inputBonusNumber();
         const winningNumber = new WinningLotto(
           inputWinningNumber,
-          inputBonusNumber
+          inputBonusNumber,
+          purchasedLotto
         );
+        const result = winningNumber.getResult();
       } catch (error) {
         console.log(`${error.message}`);
       }

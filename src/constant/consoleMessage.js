@@ -1,3 +1,5 @@
+import { winnings } from './config.js';
+
 export const INPUT_MESSAGE = Object.freeze({
   PURCHASE_AMOUNT: '구입금액을 입력해 주세요.\n',
   WINNING_NUMBERS: '당첨 번호를 입력해 주세요.\n',
@@ -6,6 +8,9 @@ export const INPUT_MESSAGE = Object.freeze({
 
 export const OUTPUT_MESSAGE = Object.freeze({
   PURCHASE_COUNT: (count) => `\n${count}개를 구매했습니다.`,
+  RESULT: (number) => {
+    `${number}개 일치 (${winnings[number]}원) - 개`;
+  },
 });
 
 export const ERROR_MESSAGE = Object.freeze({
