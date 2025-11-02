@@ -19,7 +19,7 @@ class Lotto {
         throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_NUMBER);
       }
       if (
-        number < LottoConfig.MIN_LOTTO_NUMBER &&
+        number < LottoConfig.MIN_LOTTO_NUMBER ||
         number > LottoConfig.MAX_LOTTO_NUMBER
       ) {
         throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_IN_RANGE);

@@ -10,6 +10,10 @@ const inputView = {
     const input = await Console.readLineAsync(INPUT_MESSAGE.WINNING_NUMBERS);
     return input;
   },
+  async inputBonusNumber() {
+    const input = await Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER);
+    return input;
+  },
 };
 
 export default inputView;

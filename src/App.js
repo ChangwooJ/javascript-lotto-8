@@ -1,5 +1,5 @@
-import Lotto from './domain/Lotto.js';
 import PurchasedLotto from './domain/PurchasedLotto.js';
+import WinningLotto from './domain/WinningLotto.js';
 import { CalCulateLottoCount } from './util/calculateLottoCount.js';
 import { validatePurchaseAmount } from './validate/validators.js';
 import inputView from './view/inputView.js';
@@ -21,8 +21,11 @@ class App {
         });
 
         const inputWinningNumber = await inputView.inputWinningNumber();
-        const winningNumbersArray = inputWinningNumber.split(',');
-        const winningNumber = new Lotto(winningNumbersArray);
+        const inputBonusNumber = await inputView.inputBonusNumber();
+        const winningNumber = new WinningLotto(
+          inputWinningNumber,
+          inputBonusNumber
+        );
       } catch (error) {
         console.log(`${error.message}`);
       }
