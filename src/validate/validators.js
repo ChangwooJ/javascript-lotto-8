@@ -1,3 +1,4 @@
+import { LottoPrice } from '../constant/config.js';
 import { ERROR_MESSAGE } from '../constant/consoleMessage.js';
 
 export function validatePurchaseAmount(amount) {
@@ -11,7 +12,7 @@ export function validatePurchaseAmount(amount) {
     throw new Error(ERROR_MESSAGE.PURCHASE_CASE.MUST_BE_POSITIVE_NUMBER);
   }
 
-  if (numAmount % 1000 !== 0) {
+  if (numAmount % LottoPrice !== 0) {
     throw new Error(ERROR_MESSAGE.PURCHASE_CASE.MUST_BE_THOUSAND_UNIT);
   }
 
