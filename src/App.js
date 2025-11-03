@@ -3,8 +3,8 @@ import PurchasedLotto from './domain/PurchasedLotto.js';
 import WinningLotto from './domain/WinningLotto.js';
 import { Console } from '@woowacourse/mission-utils';
 import { printOrder } from './constant/config.js';
-import { calculateLottoCount } from './util/CalculateLottoCount.js';
-import inputView from './view/inputView.js';
+import { calculateLottoCount } from './util/calculateLottoCount.js';
+import inputView from './view/InputView.js';
 import { OutputView } from './view/outputView.js';
 import {
   validateBonusNumber,
