@@ -9,15 +9,13 @@ export const INPUT_MESSAGE = Object.freeze({
 export const OUTPUT_MESSAGE = Object.freeze({
   PURCHASE_COUNT: (count) => `\n${count}개를 구매했습니다.`,
   RESULT_HEADER: '\n당첨 통계\n---',
-  RESULT: (matchedNumber, count) => {
-    if (matchedNumber === RANK.SECOND) {
+  RESULT: (rank, count) => {
+    if (rank === RANK.SECOND) {
       return `5개 일치, 보너스 볼 일치 (${winnings[
-        matchedNumber
+        rank
       ].toLocaleString()}원) - ${count}개`;
     }
-    return `${matchedNumber}개 일치 (${winnings[
-      matchedNumber
-    ].toLocaleString()}원) - ${count}개`;
+    return `${rank}개 일치 (${winnings[rank].toLocaleString()}원) - ${count}개`;
   },
   ROI: (ROI) => `총 수익률은 ${ROI}%입니다.`,
 });

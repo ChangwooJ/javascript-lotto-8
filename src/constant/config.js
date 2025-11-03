@@ -8,7 +8,7 @@ export const RANK = Object.freeze({
   FIFTH: 3,
   FOURTH: 4,
   THIRD: 5,
-  SECOND: 5.5,
+  SECOND: 'SECOND',
   FIRST: 6,
 });
 export const winnings = {
@@ -18,3 +18,10 @@ export const winnings = {
   [RANK.SECOND]: 30000000,
   [RANK.FIRST]: 2000000000,
 };
+export const printOrder = [
+  RANK.FIFTH,
+  RANK.FOURTH,
+  RANK.THIRD,
+  RANK.SECOND,
+  RANK.FIRST,
+];

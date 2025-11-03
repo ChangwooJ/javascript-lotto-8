@@ -1,4 +1,4 @@
-import { RANK } from './constant/config.js';
+import { printOrder } from './constant/config.js';
 import Lotto from './Lotto.js';
 import PurchasedLotto from './domain/PurchasedLotto.js';
 import WinningLotto from './domain/WinningLotto.js';
@@ -78,11 +78,14 @@ class App {
       purchasedLotto
     );
     const { summary, ROI } = winningLotto.getResult();
-
+    console.log(summary);
     OutputView.printResultHeader();
-    for (const rank of Object.keys(RANK)) {
-      OutputView.printWinningResult(RANK[rank], summary[RANK[rank]]);
-    }
+
+    printOrder.forEach((rank) => {
+      const count = summary[rank] ?? 0;
+      OutputView.printWinningResult(rank, count);
+    });
+
     OutputView.printROI(ROI);
   }
 }
