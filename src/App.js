@@ -10,6 +10,7 @@ import {
 } from './validate/validators.js';
 import inputView from './view/inputView.js';
 import { OutputView } from './view/outputView.js';
+import { Console } from '@woowacourse/mission-utils';
 
 class App {
   async run() {
@@ -29,7 +30,7 @@ class App {
         const input = await inputView.inputPurchaseAmount();
         return validatePurchaseAmount(input);
       } catch (error) {
-        console.log(error.message);
+        Console.print(error.message);
       }
     }
   }
@@ -42,7 +43,7 @@ class App {
         new Lotto(winningNumberArray);
         return winningNumberArray;
       } catch (error) {
-        console.log(error.message);
+        Console.print(error.message);
       }
     }
   }
@@ -53,7 +54,7 @@ class App {
         const input = await inputView.inputBonusNumber();
         return validateBonusNumber(input, winningNumber);
       } catch (error) {
-        console.log(error.message);
+        Console.print(error.message);
       }
     }
   }
