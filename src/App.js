@@ -5,7 +5,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { printOrder } from './constant/config.js';
 import { calculateLottoCount } from './util/CalculateLottoCount.js';
 import inputView from './view/inputView.js';
-import { OutputView } from './view/OutputView.js';
+import { OutputView } from './view/outputView.js';
 import {
   validateBonusNumber,
   validatePurchaseAmount,
