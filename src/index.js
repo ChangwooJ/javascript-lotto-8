@@ -1,4 +1,11 @@
-import App from "./App.js";
+import App from './App.js';
 
-const app = new App();
-await app.run();
+(async () => {
+  const app = new App();
+  try {
+    await app.run();
+  } catch (error) {
+    console.error('🔥 실행 중 예기치 못한 오류 발생:');
+    console.error(error);
+  }
+})();

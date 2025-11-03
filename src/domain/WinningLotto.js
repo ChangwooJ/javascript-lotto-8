@@ -1,3 +1,4 @@
+
 import { LottoPrice, RANK, winnings } from '../constant/config.js';
 import Lotto from '../Lotto.js';
 

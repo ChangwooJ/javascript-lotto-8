@@ -1,21 +1,21 @@
-import { printOrder } from './constant/config.js';
 import Lotto from './Lotto.js';
 import PurchasedLotto from './domain/PurchasedLotto.js';
 import WinningLotto from './domain/WinningLotto.js';
-import { CalCulateLottoCount } from './util/calculateLottoCount.js';
-import { parsingNumbers } from './util/parsingNumber.js';
+import { Console } from '@woowacourse/mission-utils';
+import { printOrder } from './constant/config.js';
+import { calculateLottoCount } from './util/CalculateLottoCount.js';
+import inputView from './view/inputView.js';
+import { OutputView } from './view/OutputView.js';
 import {
   validateBonusNumber,
   validatePurchaseAmount,
 } from './validate/validators.js';
-import inputView from './view/InputView.js';
-import { OutputView } from './view/OutputView.js';
-import { Console } from '@woowacourse/mission-utils';
+import { parsingNumbers } from './util/parsingNumber.js';
 
 class App {
   async run() {
     const amount = await this.#getPurchaseAmount();
-    const lottoCount = CalCulateLottoCount(amount);
+    const lottoCount = calculateLottoCount(amount);
     const purchasedLotto = this.#printPurchasedLottos(lottoCount);
 
     const winningNumber = await this.#getWinningNumber();
@@ -78,7 +78,7 @@ class App {
       purchasedLotto
     );
     const { summary, ROI } = winningLotto.getResult();
-    console.log(summary);
+
     OutputView.printResultHeader();
 
     printOrder.forEach((rank) => {

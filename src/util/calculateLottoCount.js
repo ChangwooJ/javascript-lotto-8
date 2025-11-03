@@ -1,6 +1,6 @@
-import { LottoPrice } from '../constant/config.js';
+import { LottoPrice } from "../constant/config.js";
 
-export function CalCulateLottoCount(amount) {
+export function calculateLottoCount(amount) {
   const lottoCount = amount / LottoPrice;
   return lottoCount;
 }

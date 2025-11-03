@@ -1,6 +1,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from '../Lotto.js';
 
+
 class PurchasedLotto {
   #lottos;
 

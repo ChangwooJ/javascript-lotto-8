@@ -1,5 +1,5 @@
-import { LottoConfig, LottoPrice } from '../constant/config.js';
-import { ERROR_MESSAGE } from '../constant/consoleMessage.js';
+import { LottoConfig, LottoPrice } from "../constant/config.js";
+import { ERROR_MESSAGE } from "../constant/consoleMessage.js";
 
 export function validatePurchaseAmount(amount) {
   const numAmount = Number(amount);
