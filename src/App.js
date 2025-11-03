@@ -80,8 +80,8 @@ class App {
     const { summary, ROI } = winningLotto.getResult();
 
     OutputView.printResultHeader();
-    for (const rank of Object.values(RANK)) {
-      OutputView.printWinningResult(rank, summary[rank]);
+    for (const rank of Object.keys(RANK)) {
+      OutputView.printWinningResult(rank, summary[RANK[rank]]);
     }
     OutputView.printROI(ROI);
   }
