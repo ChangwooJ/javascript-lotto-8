@@ -8,8 +8,8 @@ import {
   validateBonusNumber,
   validatePurchaseAmount,
 } from './validate/validators.js';
-import inputView from './view/inputView.js';
-import { OutputView } from './view/outputView.js';
+import inputView from './view/InputView.js';
+import { OutputView } from './view/OutputView.js';
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
