@@ -3,10 +3,6 @@ import Lotto from '../Lotto.js';
 import { RANK, LottoPrice, winnings } from '../constant/config.js';
 
 describe('WinningLotto 클래스 테스트', () => {
-  beforeEach(() => {
-    jest.restoreAllMocks();
-  });
-
   const makeLotto = (numbers) => new Lotto(numbers);
   
   test('당첨 결과를 계산하고 요약 결과와 ROI를 반환한다.', () => {
