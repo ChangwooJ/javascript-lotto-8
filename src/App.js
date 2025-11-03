@@ -1,27 +1,26 @@
 import { RANK } from './constant/config.js';
+import Lotto from './domain/Lotto.js';
 import PurchasedLotto from './domain/PurchasedLotto.js';
 import WinningLotto from './domain/WinningLotto.js';
 import { CalCulateLottoCount } from './util/calculateLottoCount.js';
-import { validatePurchaseAmount } from './validate/validators.js';
+import { parsingNumbers } from './util/parsingNumber.js';
+import {
+  validateBonusNumber,
+  validatePurchaseAmount,
+} from './validate/validators.js';
 import inputView from './view/inputView.js';
 import { OutputView } from './view/outputView.js';
 
 class App {
   async run() {
-    while (true) {
-      try {
-        const amount = await this.#getPurchaseAmount();
-        const lottoCount = CalCulateLottoCount(amount);
-        const purchasedLotto = this.#printPurchasedLottos(lottoCount);
+    const amount = await this.#getPurchaseAmount();
+    const lottoCount = CalCulateLottoCount(amount);
+    const purchasedLotto = this.#printPurchasedLottos(lottoCount);
 
-        const winningNumber = await this.#getValidatedWinningNumbers();
-        const bonusNumber = await this.#getValidatedBonusNumber();
+    const winningNumber = await this.#getWinningNumber();
+    const bonusNumber = await this.#getBonusNumber(winningNumber);
 
-        this.#printWinningResults(winningNumber, bonusNumber, purchasedLotto);
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
+    this.#printWinningResults(winningNumber, bonusNumber, purchasedLotto);
   }
 
   async #getPurchaseAmount() {
@@ -35,20 +34,24 @@ class App {
     }
   }
 
-  async #getValidatedWinningNumbers() {
+  async #getWinningNumber() {
     while (true) {
       try {
-        return await inputView.inputWinningNumber();
+        const winningNumber = await inputView.inputWinningNumber();
+        const winningNumberArray = parsingNumbers(winningNumber);
+        new Lotto(winningNumberArray);
+        return winningNumberArray;
       } catch (error) {
         console.log(error.message);
       }
     }
   }
 
-  async #getValidatedBonusNumber() {
+  async #getBonusNumber(winningNumber) {
     while (true) {
       try {
-        return await inputView.inputBonusNumber();
+        const input = await inputView.inputBonusNumber();
+        return validateBonusNumber(input, winningNumber);
       } catch (error) {
         console.log(error.message);
       }

@@ -1,4 +1,4 @@
-import { LottoPrice } from '../constant/config.js';
+import { LottoConfig, LottoPrice } from '../constant/config.js';
 import { ERROR_MESSAGE } from '../constant/consoleMessage.js';
 
 export function validatePurchaseAmount(amount) {
@@ -19,10 +19,21 @@ export function validatePurchaseAmount(amount) {
   return numAmount;
 }
 
-export function validateWinningNumber(winningNumber) {
-  const numWinningNumber = Number(winningNumber);
+export function validateBonusNumber(bonusNumber, winningNumberArray) {
+  const numBonusNumber = Number(bonusNumber);
 
-  if (Number.isNaN(numWinningNumber)) {
-    throw new Error();
+  if (Number.isNaN(numBonusNumber)) {
+    throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_NUMBER);
   }
+  if (winningNumberArray.includes(numBonusNumber)) {
+    throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_UNIQUE);
+  }
+  if (
+    numBonusNumber < LottoConfig.MIN_LOTTO_NUMBER ||
+    numBonusNumber > LottoConfig.MAX_LOTTO_NUMBER
+  ) {
+    throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_IN_RANGE);
+  }
+
+  return numBonusNumber;
 }

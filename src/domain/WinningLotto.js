@@ -1,5 +1,4 @@
-import { LottoConfig, LottoPrice, RANK, winnings } from '../constant/config.js';
-import { ERROR_MESSAGE } from '../constant/consoleMessage.js';
+import { LottoPrice, RANK, winnings } from '../constant/config.js';
 import Lotto from './Lotto.js';
 
 class WinningLotto extends Lotto {
@@ -7,36 +6,11 @@ class WinningLotto extends Lotto {
   #purchasedLotto;
   #bonusNumber;
 
-  constructor(numbers, bonusNumber, purchasedLotto) {
-    const winningNumberArray = WinningLotto.parsingNumbers(numbers);
-    super(winningNumberArray);
-    this.#validateBonus(bonusNumber, winningNumberArray);
-    this.#winningNumbers = winningNumberArray;
+  constructor(winningNumber, bonusNumber, purchasedLotto) {
+    super(winningNumber);
+    this.#winningNumbers = winningNumber;
     this.#purchasedLotto = purchasedLotto;
     this.#bonusNumber = Number(bonusNumber);
-  }
-
-  static parsingNumbers(winningNumberArray) {
-    const numbersArray = winningNumberArray
-      .split(',')
-      .map((number) => Number(number.trim()));
-
-    return numbersArray;
-  }
-
-  #validateBonus(bonusNumber, winningNumberArray) {
-    if (Number.isNaN(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_NUMBER);
-    }
-    if (winningNumberArray.includes(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_UNIQUE);
-    }
-    if (
-      bonusNumber < LottoConfig.MIN_LOTTO_NUMBER ||
-      bonusNumber > LottoConfig.MAX_LOTTO_NUMBER
-    ) {
-      throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_IN_RANGE);
-    }
   }
 
   getResult() {
