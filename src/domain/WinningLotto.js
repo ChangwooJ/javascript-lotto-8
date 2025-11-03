@@ -48,7 +48,6 @@ class WinningLotto extends Lotto {
       if (matchCount === RANK.FIRST) summary[RANK.FIRST] += 1;
 
       if (matchCount === RANK.THIRD) {
-        console.log(lottoNumbers);
         const hasBonus = lottoNumbers.includes(this.#bonusNumber);
         if (hasBonus) summary[RANK.SECOND] += 1;
         else summary[RANK.THIRD] += 1;
