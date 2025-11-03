@@ -65,7 +65,10 @@ class WinningLotto extends Lotto {
     const totalInvestment =
       this.#purchasedLotto.getLottos().length * LottoPrice;
     const ROIValue = (totalReturn / totalInvestment) * 100;
-    const ROI = Number(ROIValue.toFixed(1));
+    const ROI = ROIValue.toLocaleString('ko-KR', {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    });
     return ROI;
   }
 }
