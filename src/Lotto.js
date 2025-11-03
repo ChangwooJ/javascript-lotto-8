@@ -20,7 +20,7 @@ class Lotto {
     }
 
     numbers.forEach((number) => {
-      if (Number.isNaN(number)) {
+      if (typeof number !== 'number' || Number.isNaN(number)) {
         throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_NUMBER);
       }
       if (
