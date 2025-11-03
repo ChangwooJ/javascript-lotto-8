@@ -62,9 +62,9 @@ class WinningLotto extends Lotto {
     for (const rank in summary) {
       totalReturn += summary[rank] * winnings[rank];
     }
-    const ROIValue =
-      (totalReturn / this.#purchasedLotto.getLottos().length / LottoPrice) *
-      100;
+    const totalInvestment =
+      this.#purchasedLotto.getLottos().length * LottoPrice;
+    const ROIValue = (totalReturn / totalInvestment) * 100;
     const ROI = Number(ROIValue.toFixed(1));
     return ROI;
   }

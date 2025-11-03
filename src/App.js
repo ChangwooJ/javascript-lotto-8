@@ -81,7 +81,7 @@ class App {
 
     OutputView.printResultHeader();
     for (const rank of Object.keys(RANK)) {
-      OutputView.printWinningResult(rank, summary[RANK[rank]]);
+      OutputView.printWinningResult(RANK[rank], summary[RANK[rank]]);
     }
     OutputView.printROI(ROI);
   }

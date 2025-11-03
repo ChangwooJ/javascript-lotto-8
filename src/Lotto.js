@@ -14,6 +14,11 @@ class Lotto {
       throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_SIX_NUMBER);
     }
 
+    const uniqueNumbers = new Set(numbers);
+    if (uniqueNumbers.size !== numbers.length) {
+      throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_UNIQUE);
+    }
+
     numbers.forEach((number) => {
       if (Number.isNaN(number)) {
         throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_NUMBER);
@@ -25,11 +30,6 @@ class Lotto {
         throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_IN_RANGE);
       }
     });
-
-    const uniqueNumbers = new Set(numbers);
-    if (uniqueNumbers.size !== numbers.length) {
-      throw new Error(ERROR_MESSAGE.LOTTO_CASE.MUST_BE_UNIQUE);
-    }
   }
 
   getNumbers() {

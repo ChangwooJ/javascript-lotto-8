@@ -7,11 +7,11 @@ class PurchasedLotto {
   constructor(lottoCount) {
     this.#lottos = Array.from(
       { length: lottoCount },
-      () => new Lotto(this.#gernerateLottoNumber())
+      () => new Lotto(this.#generateLottoNumber())
     );
   }
 
-  #gernerateLottoNumber() {
+  #generateLottoNumber() {
     const lottoNumber = MissionUtils.Random.pickUniqueNumbersInRange(
       1,
       45,
