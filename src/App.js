@@ -1,5 +1,5 @@
 import { RANK } from './constant/config.js';
-import Lotto from './domain/Lotto.js';
+import Lotto from './Lotto.js';
 import PurchasedLotto from './domain/PurchasedLotto.js';
 import WinningLotto from './domain/WinningLotto.js';
 import { CalCulateLottoCount } from './util/calculateLottoCount.js';
@@ -63,7 +63,8 @@ class App {
     OutputView.printPurchaseCount(count);
 
     purchasedLotto.getLottos().forEach((lotto) => {
-      OutputView.printPurchaseLottos(lotto.getNumbers());
+      const numbersStr = `[${lotto.getNumbers().join(', ')}]`;
+      OutputView.printPurchaseLottos(numbersStr);
     });
 
     return purchasedLotto;

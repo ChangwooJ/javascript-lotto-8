@@ -1,5 +1,5 @@
-import { LottoConfig } from '../constant/config.js';
-import { ERROR_MESSAGE } from '../constant/consoleMessage.js';
+import { LottoConfig } from './constant/config.js';
+import { ERROR_MESSAGE } from './constant/consoleMessage.js';
 
 class Lotto {
   #numbers;

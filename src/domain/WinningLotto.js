@@ -1,5 +1,5 @@
 import { LottoPrice, RANK, winnings } from '../constant/config.js';
-import Lotto from './Lotto.js';
+import Lotto from '../Lotto.js';
 
 class WinningLotto extends Lotto {
   #winningNumbers;
