@@ -43,11 +43,11 @@ class WinningLotto extends Lotto {
     results.forEach(({ lottoNumbers, matchingLotto }) => {
       const matchCount = matchingLotto.length;
 
-      if (matchCount === RANK.FIFTH) summary[RANK.FIFTH] += 1;
-      if (matchCount === RANK.FOURTH) summary[RANK.FOURTH] += 1;
-      if (matchCount === RANK.FIRST) summary[RANK.FIRST] += 1;
+      if (matchCount === 3) summary[RANK.FIFTH] += 1;
+      if (matchCount === 4) summary[RANK.FOURTH] += 1;
+      if (matchCount === 6) summary[RANK.FIRST] += 1;
 
-      if (matchCount === RANK.THIRD) {
+      if (matchCount === 5) {
         const hasBonus = lottoNumbers.includes(this.#bonusNumber);
         if (hasBonus) summary[RANK.SECOND] += 1;
         else summary[RANK.THIRD] += 1;

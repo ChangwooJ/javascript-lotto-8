@@ -5,11 +5,11 @@ export const LottoConfig = {
   MAX_LOTTO_NUMBER: 45,
 };
 export const RANK = Object.freeze({
-  FIFTH: 3,
-  FOURTH: 4,
-  THIRD: 5,
-  SECOND: 5.5,
-  FIRST: 6,
+  FIFTH: 'FIFTH',
+  FOURTH: 'FOURTH',
+  THIRD: 'THIRD',
+  SECOND: 'SECOND',
+  FIRST: 'FIRST',
 });
 export const winnings = {
   [RANK.FIFTH]: 5000,
